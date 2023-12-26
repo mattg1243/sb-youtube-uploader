@@ -1,5 +1,4 @@
 import os
-import subprocess
 from playwright.sync_api import sync_playwright
 
 class Generator():
