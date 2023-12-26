@@ -20,7 +20,7 @@ def main():
   g = Generator()
 
   # check queue for beats to upload
-  beat = c.get_msg_from_queue()
+  (beat, delivery_tag) = c.get_msg_from_queue()
   if beat == None:
     print('no beats in the queue for today, Ill check again tomorrow')
     try:
@@ -32,14 +32,15 @@ def main():
   try:
     urllib.request.urlretrieve(beat['img_link'], os.path.abspath('artwork.png'))
     urllib.request.urlretrieve(beat['audio_link'], os.path.abspath('audio.mp3'))
+    # generate the html and save a screenshot
+    g.write_html(beat['title'], beat['artist'])
+    g.get_screenshot()
+    g.make_video()
+    print('   ✅   all done!')
+    # send ack to queue
+    c.send_ack(delivery_tag)
   except Exception as e:
     print(e)
-  # generate the html and save a screenshot
-  g.write_html(beat['title'], beat['artist'])
-  g.get_screenshot()
-
-  # clean up files
-  g.clean_up()
 
 
 if __name__ == '__main__':
