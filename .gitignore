@@ -1,3 +1,9 @@
 .env
 __pycache__
 .DS_Store
+client_secrets.json
+artwork.png
+audio.mp3
+out.mp4
+page.html
+screenshot.png
