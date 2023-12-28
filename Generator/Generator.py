@@ -82,10 +82,11 @@ class Generator():
 
   def make_video(self):
     try:
-      os.system(f"ffmpeg -loop 1 -i {self.screenshot_path} -i {self.audio_path} -r 1 -c:v libx264 -preset slow -tune stillimage -crf 18 -c:a copy -shortest -s 1280x720 out.mp4")
+      os.system(f"ffmpeg -loop 1 -i {self.screenshot_path} -i {self.audio_path} -r -y 1 -c:v libx264 -preset slow -tune stillimage -crf 18 -c:a copy -shortest -s 1280x720 out.mp4")
       print('   ✅   video generated')
     except Exception as e:
       print('   ❌   video generation failed :(')
+    
       print(e)
 
 
@@ -94,6 +95,7 @@ class Generator():
       os.remove('artwork.png')
       os.remove('audio.mp3')
       os.remove('page.html')
+      # os.remove('out.mp4')
       print('   ✅ cleanup done')
     except Exception as e:
       print('   ❌ cleanup failed')
