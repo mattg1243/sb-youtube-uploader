@@ -2,6 +2,7 @@
 __pycache__
 .DS_Store
 client_secrets.json
+service-account.json
 artwork.png
 audio.mp3
 out.mp4
